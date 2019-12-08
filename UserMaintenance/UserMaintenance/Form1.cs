@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UserMaintenance.Entities;
 
 namespace UserMaintenance
 {
@@ -16,9 +17,9 @@ namespace UserMaintenance
         public Form1()
         {
             InitializeComponent();
-            lblLastName.Text = Resource1.LastName; // label1
-            lblFirstName.Text = Resource1.FirstName; // label2
-            btnAdd.Text = Resource1.Add; // button1
+           
+            lblFirstName.Text = Resource1.FullName; // label2
+            btnAdd.Text = Resource1.Wirte; // button1
 
             listUsers.DataSource = users;
             listUsers.ValueMember = "ID";
@@ -33,6 +34,19 @@ namespace UserMaintenance
                 FirstName = txtFirstName.Text
             };
             users.Add(u);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.InitialDirectory = Application.StartupPath;
+            sfd.Filter = "Comma Seperated Values (.csv)|.csv";
+            sfd.DefaultExt = "csv";
+            sfd.AddExtension = true;
+            if (sfd.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
         }
     }
 }
